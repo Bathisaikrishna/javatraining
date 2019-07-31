@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -21,28 +23,45 @@ public class ListExample {
 		products.add(new Product(912,"One Plus",32000.00,"mobile",100));
 		products.add(new Product(88,"HP Printer",19000.00,"computer",100));
 	
-		products.stream().filter(p -> p.getCategory().equals("mobile")).forEach(p -> System.out.println(p));
+		Map<String, List<Product>> catMap = products.stream().collect(Collectors.groupingBy(p->p.getCategory()));
 		
-		Stream<Product> mobiles = products.stream().filter(p->{
-			System.out.println("DD");
-			return p.getCategory().equals("mobile");
-		});
-		
-		mobiles.forEach(p->System.out.println(p)); // If terminal forEach is not added then executing the above line is delayed.
-		
-		List<String> names = products.stream().map(p -> p.getName()).collect(Collectors.toList());
-		for (String string : names) {
-			System.out.println(string);
+		Set<String> keys = catMap.keySet();
+		for (String key : keys) {
+			System.out.println(key);
+			List<Product> prds = catMap.get(key);
+			prds.forEach(System.out::println);
 		}
 		
-		double total = products.stream().map(p->p.getPrice()).reduce(0.0, (v1,v2) -> v1+v2);
-		System.out.println(total);
 		
-		System.out.println("*************");
-		products.stream().map(p-> {
-			DataTransferObject dtobj = new DataTransferObject(p.getName(), p.getPrice());
-			return dtobj;
-		}).forEach(p->System.out.println(p));
+		System.out.println("********");
+		
+		catMap.forEach((k,v) -> {
+			System.out.println(k);
+			v.forEach(System.out::println);
+		});
+		
+//		products.stream().filter(p -> p.getCategory().equals("mobile")).forEach(p -> System.out.println(p));
+//		
+//		Stream<Product> mobiles = products.stream().filter(p->{
+//			System.out.println("DD");
+//			return p.getCategory().equals("mobile");
+//		});
+//		
+//		mobiles.forEach(p->System.out.println(p)); // If terminal forEach is not added then executing the above line is delayed.
+//		
+//		List<String> names = products.stream().map(p -> p.getName()).collect(Collectors.toList());
+//		for (String string : names) {
+//			System.out.println(string);
+//		}
+//		
+//		double total = products.stream().map(p->p.getPrice()).reduce(0.0, (v1,v2) -> v1+v2);
+//		System.out.println(total);
+//		
+//		System.out.println("*************");
+//		products.stream().map(p-> {
+//			DataTransferObject dtobj = new DataTransferObject(p.getName(), p.getPrice());
+//			return dtobj;
+//		}).forEach(p->System.out.println(p));
 		
 		
 //		products.stream().map(p->p.getName()).forEach(System.out::println);
