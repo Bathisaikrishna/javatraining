@@ -4,6 +4,8 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import junit.framework.Assert;
+
 public class TimeTest {
 
 	@Test
@@ -11,6 +13,7 @@ public class TimeTest {
 		Time t1 = new Time(4,30);
 		Time t2 = new Time(3,45);
 		assertEquals(new Time(8,15),Time.addtime(t1, t2));
+		
 		
 	}
 

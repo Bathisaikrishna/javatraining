@@ -1,6 +1,9 @@
 package com.visa.prj.entity;
 
- 
+import com.visa.prj.annotations.Column;
+import com.visa.prj.annotations.Table;
+
+@Table(name="products")
 public class Product implements Comparable<Product>{
 	private int id;
 	private String name;
@@ -19,16 +22,16 @@ public class Product implements Comparable<Product>{
 		this.count = count;
 	}
 
-	 
+	@Column(name="prd_id", type = "Numeric(10)")
 	public int getId() {
 		return id;
 	}
-
+	
 	public void setId(int id) {
 		this.id = id;
 	}
 	
- 
+	@Column(name="prd_name") //has the default type of type VARCHAR(150)
 	public String getName() {
 		return name;
 	}
