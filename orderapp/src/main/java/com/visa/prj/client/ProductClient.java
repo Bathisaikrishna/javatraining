@@ -1,8 +1,8 @@
 package com.visa.prj.client;
 
-import org.springframework.context.ApplicationContext;
+import java.util.List;
+
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.visa.prj.entity.Product;
 import com.visa.prj.service.OrderService;
@@ -19,14 +19,17 @@ public class ProductClient {
 		
 		OrderService os = ctx.getBean("orderService", OrderService.class);
 		
-		Product p = new Product(0,"Logitech mouse","computer",450.00,1000);
-		os.insertProduct(p);
-		
-		System.out.println("Inserted:" + p.getId());
-		p = os.getById(1);
-		System.out.println(p.getName() + "," + p.getCategory() + "," + p.getPrice());
-		
-		
+//		Product p = new Product(0,"Logitech mouse","computer",450.00,1000);
+//		os.insertProduct(p);
+//		
+//		System.out.println("Inserted:" + p.getId());
+//		p = os.getById(1);
+//		System.out.println(p.getName() + "," + p.getCategory() + "," + p.getPrice());
+//		
+		List<Product> list = os.fetchProducts();
+		for (Product product : list) {
+			System.out.println(product.getName() + "," + product.getPrice());
+		}
 		
 		
 		

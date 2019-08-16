@@ -1,4 +1,4 @@
-package com.visa.prj.cfg;
+package com.visa.prj.config;
 
 import java.util.Properties;
 
