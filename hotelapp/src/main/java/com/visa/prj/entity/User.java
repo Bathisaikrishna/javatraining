@@ -21,11 +21,12 @@ public class User implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	@Id
+	
 	@Column(name="user_name")
 	private String username;
 	@Column(name="enabled")
     private boolean enabled;
+	@Id
 	@Column(name="user_email")
     private String email;
 	@Column(name="user_pwd")

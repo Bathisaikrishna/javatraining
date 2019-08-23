@@ -21,6 +21,8 @@
         <div class="span-8">
             <label for="searchString">Search String:</label>
             <form:input id="searchString" path="searchString"/>
+            
+            
          
         </div>
         <div class="span-6">

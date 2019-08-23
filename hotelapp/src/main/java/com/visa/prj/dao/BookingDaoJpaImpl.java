@@ -48,7 +48,8 @@ public class BookingDaoJpaImpl implements BookingDao {
 
 	@Override
 	public long createBooking(Booking booking) {
-		return 0;
+		em.persist(booking);
+		return booking.getId();
 	}
 
 	@Override
@@ -60,6 +61,12 @@ public class BookingDaoJpaImpl implements BookingDao {
 		qu.setParameter("u", user.getUsername()); //setting parameters in jpql query
 		
 		return qu.getResultList();
+	}
+
+	@Override
+	public User getUserByEmail(String email) {
+		
+		return em.find(User.class, email);
 	}
 
 }

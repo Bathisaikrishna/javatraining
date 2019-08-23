@@ -34,9 +34,16 @@ public class BookingService {
 	public User getUser(String email, String password) {
 		return bookingDao.getUser(email, password);
 	}
-	
-	public void makeBooking(User u, Hotel h, Date checkin, Date checkout, Boolean smoking, int no_of_beds) {
-		 
+	@Transactional
+	public void makeBooking(String email, long id, Date checkin, Date checkout, Boolean smoking, int no_of_beds) {
+		Booking b = new Booking();
+		b.setBeds(no_of_beds);
+		b.setHotel(bookingDao.findHotelById(id));
+		b.setUser(bookingDao.getUserByEmail(email));
+		b.setSmoking(smoking);
+		b.setCheckoutDate(checkout);
+		b.setCheckinDate(checkin);
+		bookingDao.createBooking(b);
 	}
 
 }
